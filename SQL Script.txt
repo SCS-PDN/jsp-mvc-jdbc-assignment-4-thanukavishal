@@ -1,0 +1,67 @@
+CREATE DATABASE university_db;
+USE university_db;
+
+CREATE TABLE students (
+student_id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+email VARCHAR(100) UNIQUE,
+password VARCHAR(100)
+);
+
+CREATE TABLE courses (
+course_id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+instructor VARCHAR(100),
+credits INT
+);
+
+CREATE TABLE registrations (
+reg_id INT AUTO_INCREMENT PRIMARY KEY,
+student_id INT,
+course_id INT,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (student_id) REFERENCES students(student_id),
+FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+
+INSERT INTO students (name, email, password) VALUES 
+('Thanuka Vishal', 'thanuka@example.com', '123'),
+('Roshan Gamage', 'gamage@example.com', '456');
+
+INSERT INTO courses (name, instructor, credits) VALUES 
+('Server Side Web Programming', 'Mr Isuru Madugalla', 3),
+('Software Engineering', 'Dr Ruwanthini', 4),
+('Object oriented' , 'Prof Saluka', 3);
+
+mysql> SELECT * FROM students;
++------------+----------------+---------------------+----------+
+| student_id | name           | email               | password |
++------------+----------------+---------------------+----------+
+|          1 | Thanuka Vishal | thanuka@example.com | 123      |
+|          2 | Roshan Gamage  | gamage@example.com  | 456      |
++------------+----------------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM courses;
++-----------+-----------------------------+--------------------+---------+
+| course_id | name                        | instructor         | credits |
++-----------+-----------------------------+--------------------+---------+
+|         1 | Server Side Web Programming | Mr Isuru Madugalla |       3 |
+|         2 | Software Engineering        | Dr Ruwanthini      |       4 |
+|         3 | Object oriented             | Prof Saluka        |       3 |
++-----------+-----------------------------+--------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM registrations;
++--------+------------+-----------+---------------------+
+| reg_id | student_id | course_id | date                |
++--------+------------+-----------+---------------------+
+|      1 |          2 |         1 | 2026-04-24 00:00:00 |
+|      2 |          2 |         2 | 2026-04-24 00:00:00 |
+|      3 |          2 |         2 | 2026-04-24 00:00:00 |
++--------+------------+-----------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
